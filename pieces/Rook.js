@@ -14,7 +14,7 @@ class Rook extends Piece {
 
             if (row >= 8) break;
 
-            let piece = board.grid[row][currentCol];
+            let piece = board.getPiece(row, currentCol);
 
             if (piece === null) {
                 possibleMoves.push([row, currentCol]);
@@ -31,8 +31,8 @@ class Rook extends Piece {
             let col = currentCol + i;
 
             if (col >= 8) break;
-            
-            let piece = board.grid[currentRow][col];
+
+            let piece = board.getPiece(currentRow, col);
 
             if (piece === null) {
                 possibleMoves.push([currentRow, col]);
@@ -46,11 +46,11 @@ class Rook extends Piece {
 
         // up vertical
         for (let i = 1; i < 8; i++) {
-           let  row = currentRow - i;
+            let row = currentRow - i;
 
             if (row < 0) break;
-
-            let piece = board.grid[row][currentCol];
+            
+            let piece = board.getPiece(row, currentCol);
 
             if (piece === null) {
                 possibleMoves.push([row, currentCol]);
@@ -68,7 +68,7 @@ class Rook extends Piece {
 
             if (col < 0) break;
 
-            let piece = board.grid[currentRow][col];
+            let piece = board.getPiece(currentRow, col);
 
             if (piece === null) {
                 possibleMoves.push([currentRow, col]);

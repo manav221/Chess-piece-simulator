@@ -14,7 +14,8 @@ class Queen extends Piece {
             let col = currentCol + i;
             if (row >= 8 || col >= 8) break;
 
-            let piece = board.grid[row][col];
+            let piece = board.getPiece(row,col);
+
             if (piece === null) {
                 possibleMoves.push([row, col]);
             } else if (piece.color !== this.color) {
@@ -31,7 +32,8 @@ class Queen extends Piece {
             let col = currentCol - i;
 
             if (row >= 8 || col < 0) break;
-            let piece = board.grid[row][col];
+
+            let piece = board.getPiece(row, col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
@@ -49,7 +51,8 @@ class Queen extends Piece {
             let col = currentCol + i;
 
             if (row < 0 || col >= 8) break;
-            let piece = board.grid[row][col];
+            
+            let piece = board.getPiece(row, col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
@@ -67,7 +70,8 @@ class Queen extends Piece {
             let col = currentCol - i;
 
             if (row < 0 || col < 0) break;
-            let piece = board.grid[row][col];
+
+            let piece = board.getPiece(row, col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
@@ -84,7 +88,8 @@ class Queen extends Piece {
             let row = currentRow + i;
 
             if (row >= 8) break;
-            let piece = board.grid[row][currentCol];
+
+            let piece = board.getPiece(row, currentCol);
 
             if (piece === null) {
                 possibleMoves.push([row, currentCol]);
@@ -101,7 +106,8 @@ class Queen extends Piece {
             let col = currentCol + i;
 
             if (col >= 8) break;
-            let piece = board.grid[currentRow][col];
+
+            let piece = board.getPiece(currentRow, col);
 
             if (piece === null) {
                 possibleMoves.push([currentRow, col]);
@@ -118,7 +124,8 @@ class Queen extends Piece {
             let row = currentRow - i;
 
             if (row < 0) break;
-            let piece = board.grid[row][currentCol];
+            
+            let piece = board.getPiece(row, currentCol);
 
             if (piece === null) {
                 possibleMoves.push([row, currentCol]);
@@ -135,7 +142,8 @@ class Queen extends Piece {
             let col = currentCol - i;
 
             if (col < 0) break;
-            let piece = board.grid[currentRow][col];
+
+            let piece = board.getPiece(currentRow, col);
 
             if (piece === null) {
                 possibleMoves.push([currentRow, col]);
@@ -146,6 +154,7 @@ class Queen extends Piece {
                 break;
             }
         }
+
         return possibleMoves;
     }
 }

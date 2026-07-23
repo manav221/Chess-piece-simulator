@@ -8,13 +8,13 @@ class Bishop extends Piece {
     possibleMoves(board,currentRow, currentCol) {
         let possibleMoves = [];
 
-        // down-right movement
+        // down-right
         for (let i = 1; i < 8; i++) {
             let row = currentRow + i;
             let col = currentCol + i;
             if (row >= 8 || col >= 8) break;
 
-            let piece = board.grid[row][col];
+            let piece = board.getPiece(row,col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
@@ -26,14 +26,14 @@ class Bishop extends Piece {
             }
         }
 
-        // down-left movement
+        // down-left
         for (let i = 1; i < 8; i++) {
             let row = currentRow + i;
             let col = currentCol - i;
 
             if (row >= 8 || col < 0) break;
 
-            let piece = board.grid[row][col];
+            let piece = board.getPiece(row, col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
@@ -51,8 +51,8 @@ class Bishop extends Piece {
             let col = currentCol + i;
 
             if (row < 0 || col >= 8) break;
-
-            let piece = board.grid[row][col];
+            
+            let piece = board.getPiece(row, col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
@@ -71,7 +71,7 @@ class Bishop extends Piece {
 
             if (row < 0 || col < 0) break;
 
-            let piece = board.grid[row][col];
+            let piece = board.getPiece(row, col);
 
             if (piece === null) {
                 possibleMoves.push([row, col]);
