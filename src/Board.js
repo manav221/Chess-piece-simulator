@@ -54,6 +54,27 @@ class Board {
             ],
         ];
     }
+
+    // getPiece(row,col)
+    getPiece(row, col) {
+        return this.grid[row][col];
+    }
+
+    // movePiece()
+    movePiece({ row, col, newRow, newCol, }) {
+        let sourcePiece = this.grid[row][col]
+        this.grid[row][col] = null;
+        let capturedPiece = this.removePiece(newRow, newCol);
+        this.grid[newRow][newCol] = sourcePiece;
+        return capturedPiece;
+    }
+
+    // removePiece()
+    removePiece(row, col) {
+        let piece = this.grid[row][col];
+        this.grid[row][col] = null;
+        return piece;
+    }
 }
 
 
