@@ -1,12 +1,11 @@
-import board from "./Board.js";
 import Piece from "../pieces/piece.js";
 
 let selectedSquare = { row: null, col: null, };
 let capturedPieces = [];
 let chance = "white";
 
-class Game{
-    constructor(board){
+class Game {
+    constructor(board) {
         this.board = board;
         this.selectedSquare = { row: null, col: null, };
         this.capturedPieces = [];
@@ -21,7 +20,7 @@ class Game{
     changeTurn() {
         return this.turn === "black" ? "white" : "black";
     }
-    
+
     // selection
     selectPiece(row, col) {
         if (this.board.getPiece(row, col)) {
@@ -36,7 +35,7 @@ class Game{
     getMoves() {
         let { row: currentRow, col: currentCol } = this.selectedSquare;
         let piece = this.board.getPiece(currentRow, currentCol);
-        return piece.possibleMoves(board, currentRow, currentCol);
+        return piece.possibleMoves(this.board, currentRow, currentCol);
     }
     legalMove(row, col) {
         let moves = this.getMoves();
@@ -53,10 +52,10 @@ class Game{
     processClick(row, col) {
         let piece = this.board.getPiece(row, col);
         let selectedPiece = this.board.getPiece(this.selectedSquare.row, this.selectedSquare.col);
-    
+
         // their is selected piece
         if (selectedPiece) {
-    
+
             // for friendly piece change selection
             if (piece?.color === selectedPiece?.color) {
                 this.selectPiece(row, col);
@@ -81,7 +80,7 @@ class Game{
                 return "deselected!";
             }
         }
-    
+
         // their is no selected piece
         if (piece) {
             this.selectPiece(row, col);
@@ -95,17 +94,19 @@ class Game{
     clickOnSquare(row, col) {
         let piece = this.board.getPiece(row, col);
         let selectedPiece = this.board.getPiece(this.selectedSquare.row, this.selectedSquare.col);
-    
+
         // Empty square → attempt move.
-        if (!piece) return processClick(row, col);
-    
+        if (!piece) return this.processClick(row, col);
+
         // Opponent's piece or a empty sqr while a piece is selected → attempt capture.
         if (selectedPiece && !this.isCurrentPlayerPiece(piece)) return this.processClick(row, col);
-    
+
         // Opponent's piece with no valid selection → ignore.
         if (piece && !this.isCurrentPlayerPiece(piece)) return "NOT_YOUR_TURN";
-    
+
         // Own piece → select/change selection.
         return this.processClick(row, col);
     }
 }
+
+export default Game;
