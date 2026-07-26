@@ -2,7 +2,7 @@ import Piece from "./piece.js";
 
 class Pawn extends Piece {
     constructor(color) {
-        super(color)
+        super(color, color === "black" ? "bP" : "wP")
         this.initialRow = this.color === "white" ? 6 : 1;
         this.direction = this.color === "white" ? -1 : 1; // -1 = up || 1 = down
     }
