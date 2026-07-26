@@ -2,7 +2,7 @@ import Piece from "./piece.js";
 
 class Rook extends Piece {
     constructor(color) {
-        super(color)
+        super(color,color === "black" ? "bR" : "wR")
     }
 
     possibleMoves(board,currentRow, currentCol) {

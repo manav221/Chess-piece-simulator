@@ -2,7 +2,7 @@ import Piece from "./piece.js";
 
 class Knight extends Piece {
     constructor(color) {
-        super(color)
+        super(color,color === "black" ? "bn" : "wn")
     }
 
     possibleMoves(board,currentRow, currentCol) {

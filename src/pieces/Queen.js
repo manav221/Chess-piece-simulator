@@ -2,7 +2,7 @@ import Piece from "./piece.js";
 
 class Queen extends Piece {
     constructor(color) {
-        super(color)
+        super(color, color === "black" ? "bQ" : "wQ")
     }
 
     possibleMoves(board,currentRow, currentCol) {

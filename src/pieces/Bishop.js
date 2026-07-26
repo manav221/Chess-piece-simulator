@@ -2,7 +2,7 @@ import Piece from "./piece.js";
 
 class Bishop extends Piece {
     constructor(color) {
-        super(color)
+        super(color,color === "black" ? "bB" : "wB")
     }
 
     possibleMoves(board,currentRow, currentCol) {
