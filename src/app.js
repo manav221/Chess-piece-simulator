@@ -1,2 +1,23 @@
-import Board from './Board.js';
-console.log(Board);
+import Board from './game/Board.js';
+import Chess from './game/Game.js';
+import { initialRender, render } from './Renderer.js';
+
+const chessBoard = document.querySelector(".chess-board");
+
+// create new chess game with class Chess
+const game1 = new Chess(new Board());
+
+// Render the initial board
+initialRender(game1.board, { row: null, col: null });
+
+// Handle user clicks on the chessboard
+chessBoard.addEventListener("click", function (dets) {
+    let row = parseInt(dets.target.dataset.row);
+    let col = parseInt(dets.target.dataset.col);
+
+    // Process the clicked square
+    game1.clickOnSquare(row, col);
+
+    // Update the board after every action
+    render(game1.board, game1.selectedSquare);
+})
