@@ -55,7 +55,7 @@ class Board {
         ];
     }
 
-    // getPiece(row,col)
+    // Return the piece at the given position
     getPiece(row, col) {
         if (row !== null && col !== null) {
             return this.grid[row][col];
@@ -63,23 +63,25 @@ class Board {
         return null;
     }
 
-    // movePiece()
+    // Move a piece and return the move details
     movePiece({ fromRow: row, fromCol: col, toRow: newRow, toCol: newCol }) {
         let sourcePiece = this.grid[row][col]
         this.grid[row][col] = null;
         let capturedPiece = this.removePiece(newRow, newCol);
         this.grid[newRow][newCol] = sourcePiece;
+
+        // Return everything that needed to undo this move later
         return { sourcePiece, capturedPiece, row, col, newRow, newCol };
     }
 
-    // removePiece()
+    // Remove and return the piece at the given position
     removePiece(row, col) {
         let piece = this.grid[row][col];
         if (piece) this.grid[row][col] = null;
         return piece;
     }
 
-    // undoMove()
+    // Restore the board to its previous state
     undoMove(moveInfo) {
         const { sourcePiece, capturedPiece } = moveInfo;
         const { row, col, newRow, newCol } = moveInfo;
