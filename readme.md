@@ -8,7 +8,7 @@ The main goal of this project was to improve OOP skills rather than implement ev
 
 ## 📸 Preview
 
-> [Chess Board](<Screenshot 2026-07-27 232809.png>)
+> (![Chess Board](chessboard.png))
 
 ---
 
