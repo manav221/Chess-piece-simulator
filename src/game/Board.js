@@ -64,19 +64,29 @@ class Board {
     }
 
     // movePiece()
-    movePiece({ fromRow: row, fromCol: col, toRow: newRow, toCol: newCol, }) {
+    movePiece({ fromRow: row, fromCol: col, toRow: newRow, toCol: newCol }) {
         let sourcePiece = this.grid[row][col]
         this.grid[row][col] = null;
         let capturedPiece = this.removePiece(newRow, newCol);
         this.grid[newRow][newCol] = sourcePiece;
-        return capturedPiece;
+        return { sourcePiece, capturedPiece, row, col, newRow, newCol };
     }
 
     // removePiece()
     removePiece(row, col) {
         let piece = this.grid[row][col];
-        this.grid[row][col] = null;
+        if (piece) this.grid[row][col] = null;
         return piece;
+    }
+
+    // undoMove()
+    undoMove(moveInfo) {
+        const { sourcePiece, capturedPiece } = moveInfo;
+        const { row, col, newRow, newCol } = moveInfo;
+        this.movePiece({ fromRow: newRow, fromCol: newCol, toRow: row, toCol: col });
+        if (moveInfo.capturedPiece) {
+            this.grid[newRow][newCol] = capturedPiece;
+        }
     }
 }
 
