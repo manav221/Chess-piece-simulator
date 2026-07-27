@@ -16,7 +16,11 @@ chessBoard.addEventListener("click", function (dets) {
     let col = parseInt(dets.target.dataset.col);
 
     // Process the clicked square
-    game1.clickOnSquare(row, col);
+    const gameResult = game1.clickOnSquare(row, col);
+    // showing game result on console
+    if(gameResult){
+        console.log(gameResult);
+    }
 
     // Update the board after every action
     render(game1.board, game1.selectedSquare);
