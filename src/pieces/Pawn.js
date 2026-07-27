@@ -9,10 +9,7 @@ class Pawn extends Piece {
 
     possibleMoves(board, currentRow, currentCol) {
         const possibleMoves = [];
-        const offsets = {
-            white: [[-1, 1], [-1, -1]],
-            black: [[1, 1], [1, -1]]
-        }
+
         if (this.isOnStartingRank(currentRow)) {
             for (let i = 1; i < 3; i++) {
                 let row = this.direction < 0 ? currentRow - i : currentRow + i;
@@ -20,28 +17,40 @@ class Pawn extends Piece {
                 let piece = board.getPiece(row, col);
                 if (!piece) {
                     possibleMoves.push([row, col]);
-                }else break;
+                } else break;
             }
-        }else{
+        } else {
             let row = currentRow + this.direction;
             let col = currentCol;
-            let piece = board.getPiece(row,col);
-            if(!piece){
-                possibleMoves.push([row,col]);
+            let piece = board.getPiece(row, col);
+            if (!piece) {
+                possibleMoves.push([row, col]);
             }
         }
+        const attackMoves = this.getAttackMoves(board, currentRow, currentCol);
+        return [...possibleMoves, ...attackMoves];
+    }
+
+    // diagonal moves for attack
+    getAttackMoves(board, currentRow, currentCol) {
+        const offsets = {
+            white: [[-1, 1], [-1, -1]],
+            black: [[1, 1], [1, -1]]
+        }
+        const attackMoves = [];
         for (let i = 0; i < offsets[this.color].length; i++) {
             let [r, c] = offsets[this.color][i];
             let row = currentRow + r;
             let col = currentCol + c;
             let piece = board.getPiece(row, col);
-            if (piece && piece.color !== this.color) {
-                possibleMoves.push([row, col]);
+            if (piece) {
+                attackMoves.push([row, col]);
             }
         }
-        return possibleMoves;
+        return attackMoves;
     }
 
+    // check pawn is on it's default or starting position or not;
     isOnStartingRank(row) {
         if (this.initialRow === row) return true;
         return false;
